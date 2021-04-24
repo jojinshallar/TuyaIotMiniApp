@@ -1,0 +1,26 @@
+<!--pages/home_center/ectricity_statistics/index.wxml-->
+
+<image class="common-panel-backgroud" mode="center" src="/image/homelogo.jpg" />
+<view>{{device_id}}</view>
+<view>{{device_name}}</view>
+<view>{{device_icon}}</view>
+<image src="{{device_icon}}" mode="aspectFill"></image>
+<!--底部 按钮-->
+<view class="bottom_col">
+	<view class='bottom_block'>
+		<image class="bottom_image" src='/image/power.png'></image>
+		<view style="margin-top:10rpx;">开关</view>
+	</view>
+	<view class='bottom_block'>
+		<image class="bottom_image" src='/image/countdown.png'></image>
+		<view  style="margin-top:10rpx;">倒计时</view>
+	</view>
+	<view class='bottom_block'>
+		<image class="bottom_image" src='/image/intime.png'></image>
+		<view  style="margin-top:10rpx;">定时</view>
+  </view>
+  <view class='bottom_block'>
+		<image class="bottom_image" src='/image/statistics.png'></image>
+		<view  style="margin-top:10rpx;">电量</view>
+	</view>
+</view>
