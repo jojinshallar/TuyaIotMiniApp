@@ -2,7 +2,8 @@
 import {
   getDevFunctions,
   getDeviceDetails,
-  deviceControl
+  deviceControl,
+  getDeviceStatus
 } from '../../../utils/api/device-api'
 import wxMqtt from '../../../utils/mqtt/wxMqtt'
 
@@ -41,9 +42,14 @@ Page({
       const {
         status
       } = newVal
-      console.log(newVal)
+      console.info('新状态回调：',newVal)
       this.updateStatus(status)
     })
+
+    const newStatus= getDeviceStatus(device_id)
+    console.info('主动新状态：',newStatus)
+
+
   },
 
   /**
@@ -53,11 +59,8 @@ Page({
     const {
       device_id
     } = this.data
-    const [{
-      name,
-      status,
-      icon
-    }, {
+    const [{      name,      status,      icon    },
+       {
       functions = []
     }] = await Promise.all([
       getDeviceDetails(device_id),
@@ -74,13 +77,23 @@ Page({
       name: '',
       value: '',
     };
-    if (Object.keys(roDpList).length > 0) {
-      let keys = Object.keys(roDpList)[0];
+   
+    //查找roDpList里面是否有包含switch的属性
+    let roSwitchIndex=Object.keys(roDpList).findIndex(p=>p.indexOf('switch')>-1)
+    //查找rdDpList里面是否有包含switch的属性
+    let rdSwitchIndex=Object.keys(rwDpList).findIndex(p=>p.indexOf('switch')>-1)
+
+
+    if (roSwitchIndex > -1) {
+      let keys = Object.keys(rwDpList)[roSwitchIndex];
+      console.info("当前2key：",keys)
       titleItem = roDpList[keys];
     } else {
-      let keys = Object.keys(rwDpList)[0];
+      let keys = Object.keys(rwDpList)[rdSwitchIndex];
+      console.info("当前2key：",keys)
       titleItem = rwDpList[keys];
     }
+console.info('临时',titleItem)
 
     const roDpListLength = Object.keys(roDpList).length
     const isRoDpListShow = Object.keys(roDpList).length > 0
@@ -114,7 +127,7 @@ Page({
           let rightvalue = value
           // 兼容初始拿到的布尔类型的值为字符串类型
           if (isExit.type === 'Boolean') {
-            rightvalue = value == 'true'
+            rightvalue = (value == 'true'||value)
           }
 
           rwDpList[code] = {
@@ -215,7 +228,18 @@ Page({
     wx.navigateTo({
       url: `/pages/home_center/ectricity_statistics/index?device_id=${device_id}&device_name=${device_name}&device_icon=${icon}`,
     })
-  }
+  },
+  jumpToTimerPage: function () {
+    console.log('jumpToTimerPage')
+    const {
+      icon,
+      device_id,
+      device_name
+    } = this.data
+    wx.navigateTo({
+      url: `/pages/home_center/timer/index?device_id=${device_id}&device_name=${device_name}&device_icon=${icon}`,
+    })
+  },
 
 
 })

@@ -42,3 +42,4 @@
 </view>
 
 <button bindtap="jumpToElectricityStatisticsPage" >电量统计</button>
+<button bindtap="jumpToTimerPage" >定时管理</button>

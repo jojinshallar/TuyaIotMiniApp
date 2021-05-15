@@ -39,3 +39,19 @@
   width: 60rpx;
   height: 60rpx;
 }
+
+
+.qiun-charts {
+  width: 750rpx;
+  height: 500rpx;
+  background-color: #FFFFFF;
+}
+.charts {
+  width: 750rpx;
+  height: 500rpx;
+  background-color: #FFFFFF;
+}
+.canvas{
+  width: 100%;
+  background-color: #9AE8FA;
+}

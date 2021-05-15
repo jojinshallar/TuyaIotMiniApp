@@ -1,11 +1,17 @@
 <!--pages/home_center/ectricity_statistics/index.wxml-->
 
-<image class="common-panel-backgroud" mode="center" src="/image/homelogo.jpg" />
-<view>{{device_id}}</view>
-<view>{{device_name}}</view>
-<view>{{device_icon}}</view>
-<image src="{{device_icon}}" mode="aspectFill"></image>
+<!--<image class="common-panel-backgroud" mode="aspectFill" src="/image/homelogo.jpg" />-->
+<view>设备Id：{{device_id}}</view>
+<view>设备名称：{{device_name}}</view>
+<radio-group bindchange="selectedTypeChanged">
+	<radio checked="true" value="1">月用电量</radio>
+	<radio value="2">年用电量</radio>
+</radio-group>
+<canvas canvas-id="currentLineCanvas" class="canvas"></canvas>
+
+<!--<image src="{{device_icon_full}}" mode="aspectFill"></image>-->
 <!--底部 按钮-->
+<View style="height:200px"></View>
 <view class="bottom_col">
 	<view class='bottom_block'>
 		<image class="bottom_image" src='/image/power.png'></image>
@@ -13,14 +19,14 @@
 	</view>
 	<view class='bottom_block'>
 		<image class="bottom_image" src='/image/countdown.png'></image>
-		<view  style="margin-top:10rpx;">倒计时</view>
+		<view style="margin-top:10rpx;">倒计时</view>
 	</view>
 	<view class='bottom_block'>
 		<image class="bottom_image" src='/image/intime.png'></image>
-		<view  style="margin-top:10rpx;">定时</view>
-  </view>
-  <view class='bottom_block'>
+		<view style="margin-top:10rpx;">定时</view>
+	</view>
+	<view class='bottom_block'>
 		<image class="bottom_image" src='/image/statistics.png'></image>
-		<view  style="margin-top:10rpx;">电量</view>
+		<view style="margin-top:10rpx;">电量</view>
 	</view>
 </view>

@@ -1,0 +1,10 @@
+<!--pages/home_center/timer/index.wxml-->
+<button bindtap="addTimer">添加任务</button>
+<button bindtap="delTimer">删除任务</button>
+<view>定时任务列表</view>
+<view wx:for="{{timer_list}}" wx:for-index="key">
+  <view>category:{{item.category.category}}</view>
+  <view>status:{{item.category.status}}</view>
+	<view>group数量:{{item.groups.length}}</view>
+  </view>
+
